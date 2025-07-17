@@ -1,26 +1,77 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Dark Blue Theme Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 215 25% 6%;
+  --foreground: 220 15% 92%;
+  --card: 215 25% 8%;
+  --card-foreground: 220 15% 92%;
+  --popover: 215 25% 8%;
+  --popover-foreground: 220 15% 92%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 215 25% 6%;
+  --secondary: 215 20% 12%;
+  --secondary-foreground: 220 15% 92%;
+  --muted: 215 20% 12%;
+  --muted-foreground: 220 10% 70%;
+  --accent: 215 20% 15%;
+  --accent-foreground: 220 15% 92%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 220 15% 92%;
+  --border: 215 20% 18%;
+  --input: 215 20% 18%;
+  --ring: 217 91% 60%;
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* Custom Scrollbar Styles */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-track-muted::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  .scrollbar-thumb-muted-foreground::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 4px;
+    border: 1px solid hsl(var(--muted));
+  }
+
+  .hover\:scrollbar-thumb-primary::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.6);
+  }
+
+  /* Firefox scrollbar styling */
+  .scrollbar-thin {
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) hsl(var(--muted));
+  }
 }
